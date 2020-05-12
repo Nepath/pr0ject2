@@ -99,7 +99,7 @@ class _RegisterContentState extends State<RegisterContent> {
             ),
           ),
           SizedBox(height: 60,),
-          GestureDetector(
+          InkWell(
             onTap: () {registerAction();},
             child: Container(
               height: 50,

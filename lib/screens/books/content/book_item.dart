@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:pr0ject2/widgets/add_position_to_database.dart';
 
 class BookItem extends StatefulWidget {
   @override
@@ -28,7 +29,10 @@ class _BookItemState extends State<BookItem> {
           leading: Icon(Icons.book , size: 50,),
           title: Text("Tytuł: Wiedźmin", style: TextStyle(fontSize: 20,),),
           subtitle: Text("Autor: Andrzej Sapkowski \nRok wydania: asgagsg"),
-          trailing: Icon(Icons.edit),
+          trailing: InkWell(
+            onTap: (){Navigator.of(context).push(MaterialPageRoute(
+              builder: (context) => AddPositionToDatabase(appBarTitle: "Edytuj Książke", appBarColor: Colors.greenAccent, authorOrProducer: "Producent",), ));},
+              child: Icon(Icons.edit)),
           isThreeLine: true,
         ),
       ),

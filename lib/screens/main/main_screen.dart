@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:pr0ject2/screens/api_search/api_search.dart';
 import 'package:pr0ject2/screens/books/books_screen.dart';
 import 'package:pr0ject2/screens/games/games_screen.dart';
 import 'package:pr0ject2/screens/movies/movies_screen.dart';
@@ -87,7 +88,7 @@ class _MainScreenState extends State<MainScreen> with SingleTickerProviderStateM
         FloatingActionButton(
           shape: StadiumBorder(),
           onPressed: (){Navigator.of(context).push(MaterialPageRoute(
-            builder: (context) => AddPositionToDatabase(appBarTitle: "Dodaj Film", appBarColor: Colors.blueAccent, authorOrProducer: "tasefas",), ));},
+            builder: (context) => SearchForMovieScreen(), ));},
           backgroundColor: Colors.blueAccent,
           child: Icon(Icons.add, size: 20,),
         );

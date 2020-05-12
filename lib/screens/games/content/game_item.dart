@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:pr0ject2/widgets/add_position_to_database.dart';
 
 class GameItem extends StatefulWidget {
   @override
@@ -28,7 +29,10 @@ class _GameItemState extends State<GameItem> {
           leading: Icon(Icons.videogame_asset , size: 50,),
           title: Text("Tytuł: Wiedźmin", style: TextStyle(fontSize: 20,),),
           subtitle: Text("Autor: Andrzej Sapkowski \nRok wydania: asgagsg"),
-          trailing: Icon(Icons.edit),
+          trailing: InkWell(
+            onTap: (){Navigator.of(context).push(MaterialPageRoute(
+              builder: (context) => AddPositionToDatabase(appBarTitle: "Dodaj Grę", appBarColor: Colors.orangeAccent, authorOrProducer: "Producent",), ));},
+              child: Icon(Icons.edit)),
           isThreeLine: true,
         ),
       ),

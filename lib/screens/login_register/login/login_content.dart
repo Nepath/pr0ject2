@@ -54,7 +54,7 @@ class _LoginContentState extends State<LoginContent> {
               ),
             ),
             SizedBox(height: 60,),
-            GestureDetector(
+            InkWell(
               onTap: () {loginUser();},
               child: Container(
                 height: 50,

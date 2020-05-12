@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:pr0ject2/blocs/log_reg_bloc.dart';
+import 'package:pr0ject2/screens/api_search/api_search.dart';
 import 'package:pr0ject2/screens/login_register/login_register_layout.dart';
 import 'package:pr0ject2/screens/main/main_screen.dart';
 import 'firebase_manager/FirebaseAuthManager.dart';
@@ -24,7 +25,7 @@ class MyApp extends StatelessWidget {
           accentColor: Colors.pink[500],
           brightness: Brightness.dark
         ),
-        home: LoginRegisterScreen()
+        home: MainScreen()
       ),
     );
   }

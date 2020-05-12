@@ -1,6 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:pr0ject2/widgets/add_position_to_database.dart';
 
 class MovieItem extends StatefulWidget {
+
+  bool is_Search = false;
+  MovieItem.Search({this.is_Search});
+  MovieItem();
+
   @override
   _MovieItemState createState() => _MovieItemState();
 }
@@ -28,7 +34,14 @@ class _MovieItemState extends State<MovieItem> {
           leading: Icon(Icons.movie , size: 50,),
           title: Text("Tytuł: Wiedźmin", style: TextStyle(fontSize: 20,),),
           subtitle: Text("Autor: Andrzej Sapkowski \nRok wydania: asgagsg"),
-          trailing: Icon(Icons.edit),
+          trailing: InkWell(
+            onTap: widget.is_Search ? (){} :
+            (){
+              Navigator.of(context).push(MaterialPageRoute(
+                builder: (context) => AddPositionToDatabase(appBarTitle: "Dodaj Grę", appBarColor: Colors.orangeAccent, authorOrProducer: "Producent",), ));
+            },
+              child: widget.is_Search ? Icon(Icons.add) : Icon(Icons.movie)
+          ),
           isThreeLine: true,
         ),
       ),
