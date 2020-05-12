@@ -87,7 +87,7 @@ class _MainScreenState extends State<MainScreen> with SingleTickerProviderStateM
         FloatingActionButton(
           shape: StadiumBorder(),
           onPressed: (){Navigator.of(context).push(MaterialPageRoute(
-            builder: (context) => AddPositionToDatabase(appBarTitle: "Dodaj Film", appBarColor: Colors.blueAccent,), ));},
+            builder: (context) => AddPositionToDatabase(appBarTitle: "Dodaj Film", appBarColor: Colors.blueAccent, authorOrProducer: "tasefas",), ));},
           backgroundColor: Colors.blueAccent,
           child: Icon(Icons.add, size: 20,),
         );
@@ -97,7 +97,7 @@ class _MainScreenState extends State<MainScreen> with SingleTickerProviderStateM
         FloatingActionButton(
           shape: StadiumBorder(),
           onPressed: (){Navigator.of(context).push(MaterialPageRoute(
-            builder: (context) => AddPositionToDatabase(appBarTitle: "Dodaj Grę", appBarColor: Colors.orangeAccent,), ));},
+            builder: (context) => AddPositionToDatabase(appBarTitle: "Dodaj Grę", appBarColor: Colors.orangeAccent, authorOrProducer: "Producent",), ));},
           backgroundColor: Colors.orangeAccent,
           child: Icon(Icons.add, size: 20,),
         );
@@ -107,7 +107,7 @@ class _MainScreenState extends State<MainScreen> with SingleTickerProviderStateM
         FloatingActionButton(
           shape: StadiumBorder(),
           onPressed: (){Navigator.of(context).push(MaterialPageRoute(
-              builder: (context) => AddPositionToDatabase(appBarTitle: "Dodaj Książkę" , appBarColor: Colors.greenAccent,), ));},
+              builder: (context) => AddPositionToDatabase(appBarTitle: "Dodaj Książkę" , appBarColor: Colors.greenAccent, authorOrProducer: "Autor",), ));},
           backgroundColor: Colors.greenAccent,
           child: Icon(Icons.add, size: 20,),
         );

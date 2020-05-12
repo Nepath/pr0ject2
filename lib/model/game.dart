@@ -1,6 +1,7 @@
 
 class Game{
 
+  String id;
   String title;
   String year;
   String producer;
