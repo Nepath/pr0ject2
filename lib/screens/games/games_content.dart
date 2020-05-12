@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:pr0ject2/screens/games/content/game_item.dart';
 
 class GamesContent extends StatefulWidget {
   @override
@@ -9,7 +10,13 @@ class _GamesContentState extends State<GamesContent> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      color: Colors.yellow,
+        child: SafeArea(
+          child: ListView(
+            children: <Widget>[
+              GameItem()
+            ],
+          ),
+        )
     );
   }
 }

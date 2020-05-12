@@ -8,7 +8,6 @@ import 'package:pr0ject2/blocs/log_reg_bloc.dart';
 import 'package:pr0ject2/screens/login_register/login/login_content.dart';
 import 'package:pr0ject2/screens/login_register/register/register_content.dart';
 import 'package:pr0ject2/screens/main/main_screen.dart';
-import 'package:pr0ject2/widgets/text_input_for_login_register.dart';
 import 'package:progress_dialog/progress_dialog.dart';
 
 

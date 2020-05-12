@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:pr0ject2/screens/books/content/book_item.dart';
 
 class BooksContent extends StatefulWidget {
   @override
@@ -9,7 +10,13 @@ class _BooksContentState extends State<BooksContent> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      color: Colors.black,
+      child: SafeArea(
+        child: ListView(
+          children: <Widget>[
+            BookItem()
+          ],
+          ),
+      )
     );
   }
 }
