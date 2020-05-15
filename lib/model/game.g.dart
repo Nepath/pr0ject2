@@ -1,25 +1,25 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'book.dart';
+part of 'game.dart';
 
 // **************************************************************************
 // JsonSerializableGenerator
 // **************************************************************************
 
-Book _$BookFromJson(Map<String, dynamic> json) {
-  return Book(
+Game _$GameFromJson(Map<String, dynamic> json) {
+  return Game(
     title: json['title'] as String,
     year: json['year'] as String,
-    author: json['author'] as String,
-    read: json['read'] as bool,
+    producer: json['producer'] as String,
+    played: json['played'] as bool,
     id: json['id'] as String,
   );
 }
 
-Map<String, dynamic> _$BookToJson(Book instance) => <String, dynamic>{
+Map<String, dynamic> _$GameToJson(Game instance) => <String, dynamic>{
+      'id': instance.id,
       'title': instance.title,
       'year': instance.year,
-      'author': instance.author,
-      'read': instance.read,
-      'id': instance.id,
+      'producer': instance.producer,
+      'played': instance.played,
     };

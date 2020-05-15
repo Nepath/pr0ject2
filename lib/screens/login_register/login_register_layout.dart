@@ -4,6 +4,7 @@ import 'package:bloc_pattern/bloc_pattern.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
+import 'package:pr0ject2/blocs/fb_database_bloc.dart';
 import 'package:pr0ject2/blocs/log_reg_bloc.dart';
 import 'package:pr0ject2/screens/login_register/login/login_content.dart';
 import 'package:pr0ject2/screens/login_register/register/register_content.dart';
@@ -28,6 +29,7 @@ class LoginRegisterScreenState extends State<LoginRegisterScreen> with SingleTic
   ProgressDialog progressDialog;
 
   LogRegBloc _logRegBloc;
+  DatabaseBloc _databaseBloc;
   StreamSubscription _registerSubscription;
   StreamSubscription _toastMessage;
   StreamSubscription _currentUser;
@@ -40,6 +42,7 @@ class LoginRegisterScreenState extends State<LoginRegisterScreen> with SingleTic
     super.initState();
     _tabController = TabController(vsync: this, length: 2, initialIndex: 0);
     _logRegBloc= BlocProvider.getBloc();
+    _databaseBloc= BlocProvider.getBloc();
     _registerSubscription = _logRegBloc.loadingLoginRegister.listen(loadingScreen);
     _toastMessage = _logRegBloc.messageObservable.listen(showtoast);
     _currentUser = _logRegBloc.currentUser.listen(changeViewIfLoggedIn);
@@ -150,6 +153,7 @@ class LoginRegisterScreenState extends State<LoginRegisterScreen> with SingleTic
       Navigator.of(context).pushReplacement(MaterialPageRoute(
           builder: (context) => MainScreen(),
       ));
+      _databaseBloc.userUid = user.uid;
     }
   }
 

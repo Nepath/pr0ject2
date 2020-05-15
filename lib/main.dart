@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:pr0ject2/blocs/fb_database_bloc.dart';
 import 'package:pr0ject2/blocs/log_reg_bloc.dart';
 import 'package:pr0ject2/screens/api_search/api_search.dart';
 import 'package:pr0ject2/screens/login_register/login_register_layout.dart';
 import 'package:pr0ject2/screens/main/main_screen.dart';
+import 'package:pr0ject2/screens/test_screen.dart';
 import 'firebase_manager/FirebaseAuthManager.dart';
 import 'package:bloc_pattern/bloc_pattern.dart';
 
@@ -32,6 +34,7 @@ class MyApp extends StatelessWidget {
 
   List<Bloc> get _blocs => [
     Bloc((_) => LogRegBloc()),
+    Bloc((_) => DatabaseBloc()),
   ];
 
   List<Dependency> get _dependencies =>[

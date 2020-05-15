@@ -46,7 +46,8 @@ class _LoginContentState extends State<LoginContent> {
 
             SizedBox(height: 20,),
             TextFormField(
-              style: TextStyle(fontSize: 17 ),
+              obscureText: true,
+              style: TextStyle(fontSize: 17, ),
               onChanged: (text) {password=text;},
               decoration: InputDecoration(
                 contentPadding: EdgeInsets.zero,

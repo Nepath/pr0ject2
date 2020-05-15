@@ -1,5 +1,10 @@
+import 'dart:async';
+
 import 'package:firebase_database/firebase_database.dart';
+import 'package:pr0ject2/model/Library.dart';
 import 'package:pr0ject2/model/book.dart';
+import 'package:pr0ject2/model/game.dart';
+import 'package:pr0ject2/model/movie.dart';
 import 'package:uuid/uuid.dart';
 
 class FBDataBaseManager{
@@ -26,4 +31,38 @@ class FBDataBaseManager{
     });
 
   }
+
+  saveDataToDatabase(String uid, Library library) => database
+      .reference()
+      .child(uid).reference()
+      .child(library.type()).reference()
+      .child(library.getItemId()).reference()
+      .update(library.returnLibrary());
+
+  removeItem(String uid, Library library) => database.reference().child(uid).reference().child(library.type()).child(library.getItemId()).remove();
+
+
+  Stream <Library> catchMovieUpdate() => database.reference().child("user").child("Movies").onChildChanged
+      .map((event) => (event.snapshot.value as Map).map((key, value) => MapEntry(key as String, value)))
+      .map((event) => Library(movie: Movie.fromJson(event)));
+
+  Stream <Library> onMovieAdded() => database.reference().child("user").child("Movies").onChildAdded
+      .map((event) => (event.snapshot.value as Map).map((key, value) => MapEntry(key as String, value)))
+      .map((event) => Library(movie: Movie.fromJson(event)));
+
+  Stream <Library> catchGameUpdate() => database.reference().child("user").child("Games").onChildChanged
+      .map((event) => (event.snapshot.value as Map).map((key, value) => MapEntry(key as String, value)))
+      .map((event) => Library(game: Game.fromJson(event)));
+
+  Stream <Library> onGameAdded() => database.reference().child("user").child("Games").onChildAdded
+      .map((event) => (event.snapshot.value as Map).map((key, value) => MapEntry(key as String, value)))
+      .map((event) => Library(game: Game.fromJson(event)));
+
+  Stream <Library> catchBookUpdate() => database.reference().child("user").child("Books").onChildChanged
+      .map((event) => (event.snapshot.value as Map).map((key, value) => MapEntry(key as String, value)))
+      .map((event) => Library(book: Book.fromJson(event)));
+
+  Stream <Library> onBookAdded() => database.reference().child("user").child("Books").onChildAdded
+      .map((event) => (event.snapshot.value as Map).map((key, value) => MapEntry(key as String, value)))
+      .map((event) => Library(book: Book.fromJson(event)));
 }

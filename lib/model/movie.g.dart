@@ -1,25 +1,25 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'book.dart';
+part of 'movie.dart';
 
 // **************************************************************************
 // JsonSerializableGenerator
 // **************************************************************************
 
-Book _$BookFromJson(Map<String, dynamic> json) {
-  return Book(
-    title: json['title'] as String,
+Movie _$MovieFromJson(Map<String, dynamic> json) {
+  return Movie(
     year: json['year'] as String,
-    author: json['author'] as String,
-    read: json['read'] as bool,
+    title: json['title'] as String,
+    director: json['director'] as String,
     id: json['id'] as String,
+    watched: json['watched'] as bool,
   );
 }
 
-Map<String, dynamic> _$BookToJson(Book instance) => <String, dynamic>{
+Map<String, dynamic> _$MovieToJson(Movie instance) => <String, dynamic>{
       'title': instance.title,
       'year': instance.year,
-      'author': instance.author,
-      'read': instance.read,
+      'director': instance.director,
+      'watched': instance.watched,
       'id': instance.id,
     };

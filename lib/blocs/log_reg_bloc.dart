@@ -17,10 +17,13 @@ class LogRegBloc extends BlocBase{
   BehaviorSubject<bool> _loadingLoginRegisterSubject = BehaviorSubject();
   Stream<bool> get loadingLoginRegister => _loadingLoginRegisterSubject.stream;
 
+
+
   @override
   void dispose(){
     super.dispose();
   }
+
 
   Future checkIfLogged()async {
     firebaseAuthManager.getUser().then((value){

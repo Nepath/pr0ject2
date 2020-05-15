@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:pr0ject2/firebase_manager/FirebaseDatabaseManager.dart';
+import 'package:pr0ject2/model/Library.dart';
+import 'package:pr0ject2/model/movie.dart';
 import 'package:pr0ject2/screens/api_search/api_search.dart';
 import 'package:pr0ject2/screens/books/books_screen.dart';
 import 'package:pr0ject2/screens/games/games_screen.dart';
@@ -108,7 +111,8 @@ class _MainScreenState extends State<MainScreen> with SingleTickerProviderStateM
         FloatingActionButton(
           shape: StadiumBorder(),
           onPressed: (){Navigator.of(context).push(MaterialPageRoute(
-              builder: (context) => AddPositionToDatabase(appBarTitle: "Dodaj Książkę" , appBarColor: Colors.greenAccent, authorOrProducer: "Autor",), ));},
+              builder: (context) => AddPositionToDatabase(appBarTitle: "Dodaj Książkę" , appBarColor: Colors.greenAccent, authorOrProducer: "Autor",), ));
+          },
           backgroundColor: Colors.greenAccent,
           child: Icon(Icons.add, size: 20,),
         );
