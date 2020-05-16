@@ -6,6 +6,7 @@ import 'package:pr0ject2/blocs/fb_database_bloc.dart';
 import 'package:pr0ject2/firebase_manager/FirebaseDatabaseManager.dart';
 import 'package:pr0ject2/model/Library.dart';
 import 'package:pr0ject2/model/book.dart';
+import 'package:pr0ject2/model/game.dart';
 import 'package:pr0ject2/model/movie.dart';
 
 class TestTest extends StatefulWidget {
@@ -35,16 +36,16 @@ class _TestTestState extends State<TestTest> {
 
             FBDataBaseManager test = FBDataBaseManager();
 
-            Book filmik = Book( year: "2020", title: "jedna", author: "spakowski", read: true, id: "asgfga");
-            Book filmik1 = Book( year: "2020", title: "jaskolka", author: "spakowski", read: true, id: "sdg");
-            Book filmik2 = Book( year: "2020", title: "wiosny", author: "spakowski", read: true, id: "sdghas");
-            Book filmik3 = Book(read: true, year: "2020", title: "nie ", author: "spakowski", id: "asdgsadh");
-            Book filmik4 = Book(read: true, year: "2020", title: "czyni", author: "spakowski", id: "zxb");
-            Library lib = Library(book: filmik);
-            Library lib1 = Library(book: filmik1);
-            Library lib2 = Library(book: filmik2);
-            Library lib3 = Library(book: filmik3);
-            Library lib4 = Library(book: filmik4);
+            Game filmik = Game(year: "asedgf", title: "asdgsdg", id: "idik", played: false, producer: "polaki");
+            Game filmik1 = Game(year: "asedgf", title: "asdgsdg", id: "idifgk", played: false, producer: "polaki");
+            Game filmik2 = Game(year: "asedgf", title: "asdgsdg", id: "idvbik", played: false, producer: "polaki");
+            Game filmik3 = Game(year: "asedgf", title: "asdgsdg", id: "idxcik", played: false, producer: "polaki");
+            Game filmik4 = Game(year: "asedgf", title: "asdgsdg", id: "idasdasik", played: false, producer: "polaki");
+            Library lib = Library(game: filmik);
+            Library lib1 = Library(game: filmik1);
+            Library lib2 = Library(game: filmik2);
+            Library lib3 = Library(game: filmik3);
+            Library lib4 = Library(game: filmik4);
             test.saveDataToDatabase("user", lib);
             test.saveDataToDatabase("user", lib1);
             test.saveDataToDatabase("user", lib2);

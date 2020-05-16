@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:pr0ject2/enum/record_type.dart';
 import 'package:pr0ject2/model/Library.dart';
 import 'package:pr0ject2/widgets/add_position_to_database.dart';
 
@@ -45,7 +46,7 @@ class _BookItemState extends State<BookItem> {
           subtitle: Text("Autor: ${book.book.author} \nRok wydania: ${book.book.year}"),
           trailing: InkWell(
             onTap: (){Navigator.of(context).push(MaterialPageRoute(
-              builder: (context) => AddPositionToDatabase(appBarTitle: "Edytuj Książke", appBarColor: Colors.greenAccent, authorOrProducer: "Autor",), ));},
+              builder: (context) => AddPositionToDatabase(RecordType.BOOKEDIT, library: book,), ));},
               child: Icon(Icons.edit)),
           isThreeLine: true,
         ),

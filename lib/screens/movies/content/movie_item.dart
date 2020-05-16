@@ -1,17 +1,39 @@
+import 'dart:async';
+
+import 'package:bloc_pattern/bloc_pattern.dart';
 import 'package:flutter/material.dart';
+import 'package:pr0ject2/blocs/fb_database_bloc.dart';
+import 'package:pr0ject2/enum/record_type.dart';
+import 'package:pr0ject2/model/Library.dart';
 import 'package:pr0ject2/widgets/add_position_to_database.dart';
 
 class MovieItem extends StatefulWidget {
 
   bool is_Search = false;
+
+  Library movie;
+  MovieItem(this.movie);
+
+
   MovieItem.Search({this.is_Search});
-  MovieItem();
 
   @override
   _MovieItemState createState() => _MovieItemState();
 }
 
 class _MovieItemState extends State<MovieItem> {
+
+  Library movie;
+
+  DatabaseBloc _databaseBloc;
+
+  @override
+  void initState() {
+    _databaseBloc = BlocProvider.getBloc();
+    movie = widget.movie;
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -32,19 +54,26 @@ class _MovieItemState extends State<MovieItem> {
         ),
         child: ListTile(
           leading: Icon(Icons.movie , size: 50,),
-          title: Text("Tytuł: Wiedźmin", style: TextStyle(fontSize: 20,),),
-          subtitle: Text("Autor: Andrzej Sapkowski \nRok wydania: asgagsg"),
+          title: Text("Tytuł: ${movie.movie.title}", style: TextStyle(fontSize: 20,),),
+          subtitle: Text("Autor: ${movie.movie.director} \nRok wydania: ${movie.movie.year}"),
           trailing: InkWell(
-            onTap: widget.is_Search ? (){} :
-            (){
-              Navigator.of(context).push(MaterialPageRoute(
-                builder: (context) => AddPositionToDatabase(appBarTitle: "Dodaj Grę", appBarColor: Colors.orangeAccent, authorOrProducer: "Producent",), ));
+            onTap: widget.is_Search ?
+                (){
+
+            }
+            :
+                (){
+              DeleteMovie();
             },
-              child: widget.is_Search ? Icon(Icons.add) : Icon(Icons.movie)
+              child: widget.is_Search ? Icon(Icons.add) : Icon(Icons.delete)
           ),
           isThreeLine: true,
         ),
       ),
     );
+  }
+
+  void DeleteMovie(){
+    _databaseBloc.removeItemFromFireBaseDatabase(widget.movie);
   }
 }

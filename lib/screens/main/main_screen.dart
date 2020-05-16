@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:pr0ject2/enum/record_type.dart';
 import 'package:pr0ject2/firebase_manager/FirebaseDatabaseManager.dart';
 import 'package:pr0ject2/model/Library.dart';
 import 'package:pr0ject2/model/movie.dart';
@@ -101,7 +102,7 @@ class _MainScreenState extends State<MainScreen> with SingleTickerProviderStateM
         FloatingActionButton(
           shape: StadiumBorder(),
           onPressed: (){Navigator.of(context).push(MaterialPageRoute(
-            builder: (context) => AddPositionToDatabase(appBarTitle: "Dodaj Grę", appBarColor: Colors.orangeAccent, authorOrProducer: "Producent",), ));},
+            builder: (context) => AddPositionToDatabase(RecordType.GAMEADD), ));},
           backgroundColor: Colors.orangeAccent,
           child: Icon(Icons.add, size: 20,),
         );
@@ -111,7 +112,7 @@ class _MainScreenState extends State<MainScreen> with SingleTickerProviderStateM
         FloatingActionButton(
           shape: StadiumBorder(),
           onPressed: (){Navigator.of(context).push(MaterialPageRoute(
-              builder: (context) => AddPositionToDatabase(appBarTitle: "Dodaj Książkę" , appBarColor: Colors.greenAccent, authorOrProducer: "Autor",), ));
+              builder: (context) => AddPositionToDatabase(RecordType.BOOKADD,), ));
           },
           backgroundColor: Colors.greenAccent,
           child: Icon(Icons.add, size: 20,),
