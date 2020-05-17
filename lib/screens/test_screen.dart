@@ -1,57 +1,156 @@
 import 'dart:async';
 
 import 'package:bloc_pattern/bloc_pattern.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:pr0ject2/blocs/fb_database_bloc.dart';
-import 'package:pr0ject2/firebase_manager/FirebaseDatabaseManager.dart';
+import 'package:flutter/rendering.dart';
+import 'package:pr0ject2/blocs/omdb_bloc.dart';
 import 'package:pr0ject2/model/Library.dart';
-import 'package:pr0ject2/model/book.dart';
-import 'package:pr0ject2/model/game.dart';
-import 'package:pr0ject2/model/movie.dart';
+import 'package:pr0ject2/model/MovieT.dart';
 
 class TestTest extends StatefulWidget {
+
+  String title;
+  String imageString = "https://images-na.ssl-images-amazon.com/images/I/81C2seYU41L._SL1500_.jpg";
+
+  MovieT movieT;
+  TestTest({this.movieT});
   @override
   _TestTestState createState() => _TestTestState();
 }
 
 class _TestTestState extends State<TestTest> {
 
-  DatabaseBloc _databaseBloc;
-  StreamSubscription _registerSubscription;
+  OmdbBloc _omdbBloc;
+  StreamSubscription result;
+  Image image;
+  MovieT movie;
+  List<String> actors =["trs"];
 
   @override
   void initState() {
-    _databaseBloc = BlocProvider.getBloc();
-    _registerSubscription = _databaseBloc.onMovieAdded.listen(testowyvoid);
-//        .loadingLoginRegister.listen(loadingScreen)
+    _omdbBloc = BlocProvider.getBloc();
+    movie = widget.movieT;
+    image = Image.network(movie.poster);
+    result = _omdbBloc.movieStream.listen(fetchData);
+    if(movie.poster=="N/A"){
+      image=Image.network("https://eticketsolutions.com/demo/themes/e-ticket/img/movie.jpg");
+    }
     super.initState();
+  }
+
+
+  void fetchData(MovieT movieResult){
+    movie = movieResult;
+  }
+
+  
+  @override
+  void dispose() {
+    _omdbBloc.dispose();
+    result.cancel();
+    super.dispose();
   }
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      child: SafeArea(
-        child: RaisedButton(
-          onPressed: (){
-
-            FBDataBaseManager test = FBDataBaseManager();
-
-            Game filmik = Game(year: "asedgf", title: "asdgsdg", id: "idik", played: false, producer: "polaki");
-            Game filmik1 = Game(year: "asedgf", title: "asdgsdg", id: "idifgk", played: false, producer: "polaki");
-            Game filmik2 = Game(year: "asedgf", title: "asdgsdg", id: "idvbik", played: false, producer: "polaki");
-            Game filmik3 = Game(year: "asedgf", title: "asdgsdg", id: "idxcik", played: false, producer: "polaki");
-            Game filmik4 = Game(year: "asedgf", title: "asdgsdg", id: "idasdasik", played: false, producer: "polaki");
-            Library lib = Library(game: filmik);
-            Library lib1 = Library(game: filmik1);
-            Library lib2 = Library(game: filmik2);
-            Library lib3 = Library(game: filmik3);
-            Library lib4 = Library(game: filmik4);
-            test.saveDataToDatabase("user", lib);
-            test.saveDataToDatabase("user", lib1);
-            test.saveDataToDatabase("user", lib2);
-            test.saveDataToDatabase("user", lib3);
-            test.saveDataToDatabase("user", lib4);
-          },
+    return Scaffold(
+      appBar: AppBar(
+        title: Text(movie.title),
+      ),
+      body: DefaultTextStyle(
+        style: TextStyle(color: Colors.grey[300] , fontSize: 14),
+        child: Container(
+          child: Padding(
+            padding: EdgeInsets.all(10),
+            child: ListView(
+              children: <Widget>[
+                Padding(
+                  padding: EdgeInsets.only(top: 5, bottom: 5),
+                  child: Row(
+                    children: <Widget>[
+                      Text(movie.type),
+                      SizedBox(width: 20,),
+                      Text(movie.genre),
+                    ],
+                  ),
+                ),
+                SizedBox(height: 10,),
+                Text("Data wydania" , style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),),
+                Text(movie.released),
+                Padding(
+                  padding: EdgeInsets.only(top: 15, bottom: 15),
+                  child: Text(movie.plot),
+                ),
+                Row(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: <Widget>[
+                    Expanded(
+                        flex: 1,
+                        child: image),
+                    Expanded(
+                      flex: 1,
+                      child: Padding(
+                          padding: EdgeInsets.all(10),
+                          child: Column(
+                            children: <Widget>[
+                              Row(
+                                children: <Widget>[
+                                  Icon(Icons.access_time, size: 40,),
+                                  SizedBox(width: 10,),
+                                  Text(movie.runtime),
+                                ],
+                              ),
+                              SizedBox(height: 30,),
+                              Row(
+                                children: <Widget>[
+                                  Icon(Icons.star, color: Colors.yellowAccent, size: 40,),
+                                  SizedBox(width: 10,),
+                                  Text(movie.imdbRate),
+                                ],
+                              ),
+                              SizedBox(height: 30,),
+                              Row(
+                                children: <Widget>[
+                                  Icon(Icons.supervised_user_circle, size: 40,),
+                                  SizedBox(width: 10,),
+                                  Text(movie.imdbVotes),
+                                ],
+                              ),
+                            ],
+                          )
+                      ),
+                    )
+                  ],
+                ),
+                Divider(height: 20, thickness: 2,),
+                Padding(
+                    padding: EdgeInsets.only(bottom: 20, left: 10),
+                    child: Text("Reżyser" , style: TextStyle(fontSize: 25, fontWeight: FontWeight.bold), ),),
+                Row(
+                  children: <Widget>[
+                    Icon(Icons.person, size: 16,),
+                    SizedBox(width: 10),
+                    Text(movie.director, style: TextStyle(fontSize: 16),),
+                  ],
+                ),
+                Divider(height: 20, thickness: 2,),
+                Padding(
+                  padding: EdgeInsets.only(bottom: 20, left: 10),
+                  child: Text("Aktorzy" , style: TextStyle(fontSize: 25, fontWeight: FontWeight.bold), ),),
+                ListView.builder(
+                  shrinkWrap: true,
+                    itemCount: movie.actorsList().length,
+                    itemBuilder: (_, position) {return Row(
+                      children: <Widget>[
+                        Icon(Icons.person, size: 16,),
+                        SizedBox(width: 10),
+                        Text(movie.actorsList()[position], style: TextStyle(fontSize: 16)),
+                      ],
+                    );})
+              ],
+            ),
+          ),
         ),
       ),
     );

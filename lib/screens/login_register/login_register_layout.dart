@@ -49,6 +49,15 @@ class LoginRegisterScreenState extends State<LoginRegisterScreen> with SingleTic
 
   }
 
+  void check(){
+    _databaseBloc.getUserUid();
+    if (_databaseBloc.userUid!=null){
+      Navigator.of(context).pushReplacement(MaterialPageRoute(
+        builder: (context) => MainScreen(),
+      ));
+    }
+  }
+
   @override
   void dispose() {
     super.dispose();
@@ -149,7 +158,7 @@ class LoginRegisterScreenState extends State<LoginRegisterScreen> with SingleTic
   }
 
   void changeViewIfLoggedIn(FirebaseUser user){
-    if (user.uid!=null){
+    if (user!=null){
       Navigator.of(context).pushReplacement(MaterialPageRoute(
           builder: (context) => MainScreen(),
       ));

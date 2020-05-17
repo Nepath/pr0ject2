@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:bloc_pattern/bloc_pattern.dart';
 import 'package:flutter/material.dart';
 import 'package:pr0ject2/blocs/fb_database_bloc.dart';
@@ -14,13 +16,21 @@ class _BooksContentState extends State<BooksContent> {
 
   List<Library> listofBooks = [];
   DatabaseBloc _databaseBloc;
+  StreamSubscription subscriptiononBookAdded;
+  StreamSubscription subscriptiononBookDeleted;
 
   @override
   void initState() {
     _databaseBloc = BlocProvider.getBloc();
-    _databaseBloc.deletedBookIdObservable.listen(onDeleteItem);
-    _databaseBloc.onBookAdded.listen(onBookAdded);
+    subscriptiononBookDeleted = _databaseBloc.deletedBookIdObservable.listen(onDeleteItem);
+    subscriptiononBookAdded = _databaseBloc.onBookAdded.listen(onBookAdded);
     super.initState();
+  }
+  @override
+  void dispose() {
+    subscriptiononBookDeleted.cancel();
+    subscriptiononBookAdded.cancel();
+    super.dispose();
   }
 
   @override

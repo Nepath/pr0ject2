@@ -66,8 +66,10 @@ class _RegisterContentState extends State<RegisterContent> {
 
           SizedBox(height: 20,),
           Form(
+
             key: _passwordFormKey,
             child: TextFormField(
+              obscureText: true,
               controller: _passwordController,
               validator: (text) {if(text.length<8) {return "Za krótkie hasło. Minimum 8 znaków";} return null;},
               onChanged: (text)  {
@@ -85,6 +87,7 @@ class _RegisterContentState extends State<RegisterContent> {
           Form(
             key: _confirmPasswordFormKey,
             child: TextFormField(
+              obscureText: true,
               validator: (text) {if(confirmPassword!= password && confirmPassword.isNotEmpty) {
                 return "Hasła nie są identyczne";
               } return null;},

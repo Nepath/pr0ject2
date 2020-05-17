@@ -1,4 +1,4 @@
-import 'package:pr0ject2/model/movie.dart';
+import 'package:pr0ject2/model/MovieT.dart';
 import 'package:pr0ject2/model/search_list_movies.dart';
 import 'package:retrofit/http.dart';
 import 'package:dio/dio.dart';
@@ -14,5 +14,5 @@ abstract class OmdbMoviesProvider{
   Future<SearchMovies> getMovieList(@Query("s") String text, {@Query ("apikey") String apiKey = "a7a8d1d6"});
 
   @GET("http://www.omdbapi.com/")
-  Future<Movie> getCurrentMovie(@Query("t") String text, {@Query ("apikey") String apiKey = "a7a8d1d6"});
+  Future<MovieT> getCurrentMovie(@Query("i") String text, {@Query ("apikey") String apiKey = "a7a8d1d6"});
 }

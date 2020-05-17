@@ -28,6 +28,12 @@ class _SearchForMovieScreenState extends State<SearchForMovieScreen> {
   }
 
   @override
+  void dispose() {
+    searchSubscription.cancel();
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Material(
       child: Theme(

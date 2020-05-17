@@ -60,7 +60,7 @@ class _LoginContentState extends State<LoginContent> {
               child: Container(
                 height: 50,
                 child: Center(child:
-                Text("Zarejestruj", style: TextStyle(color: Colors.white),)),
+                Text("Zaloguj", style: TextStyle(color: Colors.white),)),
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(50),
                   color: Color(0xfffa526c),
