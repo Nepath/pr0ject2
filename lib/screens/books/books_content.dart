@@ -29,7 +29,16 @@ class _BooksContentState extends State<BooksContent> {
       child: SafeArea(
         child: ListView.builder(
           itemCount: listofBooks.length,
-          itemBuilder: (_, position) { return new BookItem(listofBooks[position]);},
+          itemBuilder: (_, position) { return Dismissible(
+              direction: DismissDirection.startToEnd,
+              key: ObjectKey(listofBooks[position]),
+              onDismissed: (direction){
+                _databaseBloc.removeItemFromFireBaseDatabase(listofBooks[position]);
+                setState(() {
+                  listofBooks.removeAt(position);
+                });
+              },
+              child: BookItem(listofBooks[position]));},
         )
       )
     );

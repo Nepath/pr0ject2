@@ -1,5 +1,10 @@
+import 'dart:async';
+
+import 'package:bloc_pattern/bloc_pattern.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:pr0ject2/blocs/omdb_bloc.dart';
+import 'package:pr0ject2/model/search_list_movies.dart';
 import 'package:pr0ject2/screens/movies/content/movie_item.dart';
 
 class SearchForMovieScreen extends StatefulWidget {
@@ -8,6 +13,20 @@ class SearchForMovieScreen extends StatefulWidget {
 }
 
 class _SearchForMovieScreenState extends State<SearchForMovieScreen> {
+
+  OmdbBloc _omdbBloc;
+  StreamSubscription searchSubscription;
+  SearchMovies listOfMovies;
+  TextEditingController searchController;
+
+  @override
+  void initState() {
+    _omdbBloc = BlocProvider.getBloc();
+    listOfMovies = SearchMovies(results: []);
+    searchSubscription = _omdbBloc.searchStream.listen(onSearchResult);
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Material(
@@ -27,6 +46,8 @@ class _SearchForMovieScreenState extends State<SearchForMovieScreen> {
                           child: Padding(
                             padding: EdgeInsets.only(left: 10.0),
                             child: TextFormField(
+                              controller: searchController,
+                              onChanged: (text)  => {_omdbBloc.fetchResults(text)},
                               decoration: InputDecoration(
                                 hintText: 'Szukaj filmu...',
                               ),
@@ -45,9 +66,8 @@ class _SearchForMovieScreenState extends State<SearchForMovieScreen> {
                 Expanded(
                   flex: 1,
                   child: ListView.builder(
-                    itemCount: 7,
-                    itemBuilder: (_, position) =>
-                    MovieItem.Search(is_Search: true,),
+                    itemCount: listOfMovies.results?.length ?? 0  ,
+                    itemBuilder: (_, position) => MovieItem.Search(is_Search: true, movieS: listOfMovies.results[position], ),
                 ),
                 )
               ],
@@ -56,5 +76,11 @@ class _SearchForMovieScreenState extends State<SearchForMovieScreen> {
         ),
       ),
     );
+  }
+
+  void onSearchResult(SearchMovies list){
+    setState(() {
+      listOfMovies= list;
+    });
   }
 }

@@ -5,6 +5,8 @@ import 'package:flutter/material.dart';
 import 'package:pr0ject2/blocs/fb_database_bloc.dart';
 import 'package:pr0ject2/enum/record_type.dart';
 import 'package:pr0ject2/model/Library.dart';
+import 'package:pr0ject2/model/movie.dart';
+import 'package:pr0ject2/model/movie_s.dart';
 import 'package:pr0ject2/widgets/add_position_to_database.dart';
 
 class MovieItem extends StatefulWidget {
@@ -13,9 +15,12 @@ class MovieItem extends StatefulWidget {
 
   Library movie;
   MovieItem(this.movie);
+  MovieS movieS;
 
 
-  MovieItem.Search({this.is_Search});
+  MovieItem.Search({this.is_Search, this.movieS}){
+    movie = Library(movie: Movie(year: movieS.year,title: movieS.title,id: movieS.id));
+  }
 
   @override
   _MovieItemState createState() => _MovieItemState();
@@ -59,7 +64,7 @@ class _MovieItemState extends State<MovieItem> {
           trailing: InkWell(
             onTap: widget.is_Search ?
                 (){
-
+                  _databaseBloc.addItemToFireBaseDatabase(movie);
             }
             :
                 (){
@@ -74,6 +79,6 @@ class _MovieItemState extends State<MovieItem> {
   }
 
   void DeleteMovie(){
-    _databaseBloc.removeItemFromFireBaseDatabase(widget.movie);
+    _databaseBloc.removeItemFromFireBaseDatabase(movie);
   }
 }

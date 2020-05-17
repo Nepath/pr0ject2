@@ -21,6 +21,9 @@ class LogRegBloc extends BlocBase{
 
   @override
   void dispose(){
+    _currentUserSubject.close();
+    _messageSubject.close();
+    _loadingLoginRegisterSubject.close();
     super.dispose();
   }
 

@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:bloc_pattern/bloc_pattern.dart';
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:pr0ject2/blocs/fb_database_bloc.dart';
 import 'package:pr0ject2/enum/record_type.dart';
 import 'package:pr0ject2/model/Library.dart';
@@ -67,6 +68,12 @@ class _AddPositionToDatabaseState extends State<AddPositionToDatabase> {
     final DateTime picked = await showDatePicker(
         context: context,
         initialDate: _date,
+        builder: (context,Widget child) => Theme(
+          data: Theme.of(context).copyWith(
+            accentColor: widget.appBarColor
+          ),
+          child: child,
+        ),
         firstDate: DateTime(1970),
         lastDate: DateTime(2100),
     );
@@ -104,6 +111,12 @@ class _AddPositionToDatabaseState extends State<AddPositionToDatabase> {
       }
     }
     super.initState();
+  }
+
+  @override
+  void dispose() {
+    _loading.cancel();
+    super.dispose();
   }
 
 
@@ -306,7 +319,11 @@ class _AddPositionToDatabaseState extends State<AddPositionToDatabase> {
 
   void addOrEditRecord() {
     if(editCreatorText.text.isEmpty || editCreatorText.text.isEmpty || editDateText.text.isEmpty ){
-
+      Fluttertoast.showToast(
+        msg: "Niektóre pola są puste... Uzupełnij",
+        gravity: ToastGravity.BOTTOM,
+        toastLength: Toast.LENGTH_LONG,
+      );
     }
     else{
       print("");
