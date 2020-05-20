@@ -53,7 +53,9 @@ class _SearchForMovieScreenState extends State<SearchForMovieScreen> {
                             padding: EdgeInsets.only(left: 10.0),
                             child: TextFormField(
                               controller: searchController,
-                              onChanged: (text)  => {_omdbBloc.fetchResults(text)},
+                              onChanged: (text)  {
+                                  _omdbBloc.fetchResults(text);
+                              },
                               decoration: InputDecoration(
                                 hintText: 'Szukaj filmu...',
                               ),
@@ -63,6 +65,7 @@ class _SearchForMovieScreenState extends State<SearchForMovieScreen> {
                         IconButton(
                           icon: Icon(Icons.search),
                           onPressed: () {
+                            _omdbBloc.fetchResults(searchController.text);
                           },
                         ),
                       ],
@@ -73,7 +76,7 @@ class _SearchForMovieScreenState extends State<SearchForMovieScreen> {
                   flex: 1,
                   child: ListView.builder(
                     itemCount: listOfMovies.results?.length ?? 0  ,
-                    itemBuilder: (_, position) => MovieItem.Search(is_Search: true, movieS: listOfMovies.results[position], ),
+                    itemBuilder: (_, position) => MovieItem.Search(is_Search: true, movieS: listOfMovies.results[position], key:ValueKey(listOfMovies.results[position].id) ),
                 ),
                 )
               ],

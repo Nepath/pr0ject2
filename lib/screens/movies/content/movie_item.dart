@@ -21,8 +21,9 @@ class MovieItem extends StatefulWidget {
   MovieS movieS;
 
 
-  MovieItem.Search({this.is_Search, this.movieS}){
+  MovieItem.Search({this.is_Search, this.movieS, Key key}): super(key:key){
     movie = Library(movie: Movie(year: movieS.year,title: movieS.title,id: movieS.id));
+
   }
 
   @override
@@ -39,15 +40,8 @@ class _MovieItemState extends State<MovieItem> {
   void initState() {
     _databaseBloc = BlocProvider.getBloc();
     _omdbBloc = BlocProvider.getBloc();
-    _omdbBloc.movieStream.listen(onData);
     movie = widget.movie;
     super.initState();
-  }
-
-  void onData(MovieT hahahahahahah){
-    final widzecik = TestTest(movieT: hahahahahahah,);
-    Navigator.of(context).push(MaterialPageRoute(
-        builder: (context) => widzecik));
   }
 
   @override

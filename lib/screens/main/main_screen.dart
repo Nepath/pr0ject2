@@ -1,13 +1,18 @@
+import 'package:bloc_pattern/bloc_pattern.dart';
 import 'package:flutter/material.dart';
+import 'package:pr0ject2/blocs/omdb_bloc.dart';
 import 'package:pr0ject2/enum/record_type.dart';
 import 'package:pr0ject2/firebase_manager/FirebaseDatabaseManager.dart';
 import 'package:pr0ject2/model/Library.dart';
+import 'package:pr0ject2/model/MovieT.dart';
 import 'package:pr0ject2/model/movie.dart';
 import 'package:pr0ject2/screens/api_search/api_search.dart';
 import 'package:pr0ject2/screens/books/books_screen.dart';
 import 'package:pr0ject2/screens/games/games_screen.dart';
 import 'package:pr0ject2/screens/movies/movies_screen.dart';
 import 'package:pr0ject2/widgets/add_position_to_database.dart';
+
+import '../test_screen.dart';
 
 class MainScreen extends StatefulWidget {
 
@@ -18,6 +23,7 @@ class MainScreen extends StatefulWidget {
 class _MainScreenState extends State<MainScreen> with SingleTickerProviderStateMixin {
 
   TabController _tabController;
+  OmdbBloc _omdbBloc;
 
   List<Widget> _widgetOptions = <Widget>[
     GamesScreen(),
@@ -29,6 +35,8 @@ class _MainScreenState extends State<MainScreen> with SingleTickerProviderStateM
   void initState() {
     _tabController = TabController(length: 3, vsync: this, initialIndex: 0);
     _tabController.addListener(_handleTabIndex);
+    _omdbBloc = BlocProvider.getBloc();
+    _omdbBloc.movieStream.listen(onData);
     super.initState();
   }
 
@@ -72,6 +80,12 @@ class _MainScreenState extends State<MainScreen> with SingleTickerProviderStateM
       ),
 
     );
+  }
+
+  void onData(MovieT hahahahahahah){
+    final widzecik = TestTest(movieT: hahahahahahah,);
+    Navigator.of(context).push(MaterialPageRoute(
+        builder: (context) => widzecik));
   }
 
   Color _indicatorColor(){

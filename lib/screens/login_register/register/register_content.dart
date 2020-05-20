@@ -30,7 +30,6 @@ class _RegisterContentState extends State<RegisterContent> {
 
   @override
   void dispose() {
-    _logRegBloc.dispose();
     super.dispose();
   }
   final _emailFormKey = GlobalKey<FormState>();

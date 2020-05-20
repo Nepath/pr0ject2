@@ -47,7 +47,6 @@ class _TestTestState extends State<TestTest> {
   
   @override
   void dispose() {
-    _omdbBloc.dispose();
     result.cancel();
     super.dispose();
   }
